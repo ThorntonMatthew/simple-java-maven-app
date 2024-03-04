@@ -11,14 +11,15 @@ set +x
 echo 'The following command extracts the value of the <name/> element'
 echo 'within <project/> of your Java/Maven project''s "pom.xml" file.'
 set -x
-NAME=`mvn -q -DforceStdout help:evaluate -Dexpression=project.name -Dfile.encoding=UTF-8`
+NAME=`mvn -q -Dexec.executable=echo -Dexec.args='${project.name}' --non-recursive exec:exec`
 set +x
 
 echo 'The following command behaves similarly to the previous one but'
 echo 'extracts the value of the <version/> element within <project/> instead.'
 set -x
-VERSION=`mvn -q -DforceStdout help:evaluate -Dexpression=project.version -Dfile.encoding=UTF-8`
+VERSION=`mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec`
 set +x
+
 echo 'Name:'
 echo $NAME
 
